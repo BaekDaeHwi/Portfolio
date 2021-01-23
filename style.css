@@ -13,6 +13,8 @@
   --color-yellow: #fff7d1;
   --color-orange: #feb546;
   --color-black: #000000;
+  --color-navy: #000080;
+  --color-brown: #a2908a;
 
   /* Font size */
   --font-large: 48px;
@@ -94,7 +96,7 @@ p {
 #navbar {
   display: flex;
   justify-content: space-between;
-  background-color: var(--color-light-grey);
+  background-color: var(--color-brown);
   align-items: center;
   color: var(--color-white);
   padding: 16px;
@@ -125,7 +127,7 @@ p {
 
 /* Home */
 #home {
-  background: url("imgs/homebackground.png") center/cover no-repeat;
+  background: url("imgs/homebackground.jpg") center/cover no-repeat;
   padding: 40px;
   text-align: center;
 }
@@ -148,7 +150,7 @@ p {
   font-weight: var(--weight-bold);
   margin: 24px;
   padding: 8px 12px;
-  border: 2px soild var(--color-white);
+  border: 2px solid var(--color-white);
   border-radius: var(--size-border-radius);
 }
 /* 위의 네브바랑 콘택미 버튼 테두리가 계속 남아있음 확인바람 */
