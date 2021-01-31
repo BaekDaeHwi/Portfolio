@@ -5,8 +5,8 @@ const navbarHeight=navbar.getBoundingClientRect().height;
 
 document.addEventListener('scroll',()=>{
     //check value in console
-    console.log(window.scrollY);
-    console.log(`navbarHeight: ${navbarHeight}`);
+    //console.log(window.scrollY);
+    //console.log(`navbarHeight: ${navbarHeight}`);
 
     if(window.scrollY > navbarHeight) {
         navbar.classList.add('navbar--dark');
@@ -25,10 +25,11 @@ navbarMenu.addEventListener('click',(event)=>{
         return;
     }
     //check value in console
-    console.log(event.target.dataset.link);
+    //console.log(event.target.dataset.link);
     
     navbarMenu.classList.remove('open');
     scrollIntoView(link);
+    sekectNavItem(target);
 });
 
 
@@ -92,7 +93,7 @@ const active = document.querySelector('.category_btn.selected');
     projectContainer.classList.add('anim-out');
     setTimeout(() => {
         projects.forEach((project) => {
-        console.log(project.dataset.type);
+        //console.log(project.dataset.type);
         if (filter === '*' || filter === project.dataset.type) {
             project.classList.remove('invisible');
         } else {
@@ -109,3 +110,70 @@ function scrollIntoView(selector){
     const scrollTo = document.querySelector(selector);
     scrollTo.scrollIntoView({behavior: 'smooth'});
 }
+
+
+/* preparing 
+
+//Planning for navbar tracking
+//1. Bring all section elements
+//2. By using "IntersectionObserve" that can be observe all sections
+//3. It is going to activate menu item that showing sections
+
+//task 1
+const sectionIds = [
+    '#home',
+    '#about',
+    '#skills',
+    '#work',
+    '#testimonials',
+    '#contact',
+];
+const sections = sectionIds.map(id => document.querySelector(id));
+const navItems = sectionIds.map(id =>
+    document.querySelector(`[data-link="${id}"]`)
+);
+
+//task2
+let selectedNavIndex = 0;
+let selectedNavItem = navItems[0];
+
+function selectNavItem(selected) {
+    selectedNavItem.classList.remove('active');
+    selectedNavItem = selected;
+    selectedNavItem.classList.add('active');
+}
+
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.3,
+};
+
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting && entry.intersectionRatio > 0) {
+            const index = sectionIds.indexOf(`#${entry.target.id}`);
+
+      // page going up
+            if (entry.boundingClientRect.y < 0) {
+                selectedNavIndex = index + 1;
+            } else {
+                selectedNavIndex = index - 1;
+            }
+        }
+    });
+};
+
+const observer = new IntersectionObserver(observerCallback, observerOptions);
+sections.forEach(section => observer.observe(section));
+
+window.addEventListener('wheel', ()=>{
+    if (window.scrollY === 0) {
+        selectedNavIndex = 0;
+    } else if (Math.round(window.scrollY + window.innerHeight) >= document.body.clientHeight) {
+        selectedNavIndex = navItems.length - 1;
+    }
+    selectNavItem(navItems[selectedNavIndex]);
+});
+
+*/
